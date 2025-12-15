@@ -1160,7 +1160,7 @@ export const config: PortfolioConfig = {
     ],
     author: "Cedar Core",
     themeColor: "#5D9EFF",
-    favicon: "/favicon.ico",
+    favicon: "/logo-dark.png",
     appleTouchIcon: "/apple-touch-icon.png",
     manifest: "/site.webmanifest",
   },
