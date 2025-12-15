@@ -1,8 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "@/lib/utils";
-import Icon from "@/components/ui/icon";
+import { Icon } from "@/components/ui";
 
 interface SocialLink {
   name: string;
@@ -44,8 +43,7 @@ const SocialLinks = ({
   const variantClasses = {
     default:
       "bg-surface dark:bg-surface text-foreground-secondary dark:text-foreground-muted hover:bg-primary-light dark:hover:bg-primary/20 hover:text-primary",
-    filled:
-      "bg-primary/10 text-primary hover:bg-primary hover:text-white",
+    filled: "bg-primary/10 text-primary hover:bg-primary hover:text-white",
   };
 
   return (

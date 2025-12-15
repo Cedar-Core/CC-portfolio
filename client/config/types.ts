@@ -1,8 +1,3 @@
-/**
- * Portfolio Configuration Types
- * Centralized type definitions for all portfolio content and metadata
- */
-
 // ============================================================================
 // Core Types
 // ============================================================================

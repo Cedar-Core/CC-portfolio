@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Shad } from "@/components/ui";
-import Icon from "@/components/ui/icon";
+import { Shad, Icon } from "@/components/ui";
 
 interface ServiceCardProps {
   icon: string;

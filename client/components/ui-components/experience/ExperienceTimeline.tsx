@@ -9,7 +9,6 @@ import { Shad, Icon } from "@/components/ui";
 import { getExperiences } from "@/config/helpers";
 import {
   motion,
-  fadeInUp,
   fadeInLeft,
   fadeInRight,
   defaultTransition,

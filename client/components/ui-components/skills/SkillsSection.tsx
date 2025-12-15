@@ -1,17 +1,18 @@
 "use client";
 
-import * as React from "react";
-import SectionWrapper from "@/components/ui-components/shared/SectionWrapper";
-import SectionHeader from "@/components/ui-components/shared/SectionHeader";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { getSkills, config } from "@/config/exports";
 import {
+  SectionHeader,
+  SectionWrapper,
+} from "@/components/ui-components/shared";
+import {
+  Badge,
+  Progress,
   FadeInUp,
   StaggerContainer,
   StaggerItem,
   motion,
-} from "@/components/ui/motion";
+} from "@/components/ui";
+import { getSkills, config } from "@/config/exports";
 
 interface SkillsSectionProps {
   className?: string;

@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { SButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Icon from "@/components/ui/icon";

@@ -1,1 +1,1 @@
-export { default as SkillsSection } from "../shared/SkillsSection";
+export { default as SkillsSection } from "./SkillsSection";

@@ -12,7 +12,6 @@ import {
 import {
   motion,
   FadeInUp,
-  FadeIn,
   staggerContainer,
   staggerItem,
   defaultTransition,

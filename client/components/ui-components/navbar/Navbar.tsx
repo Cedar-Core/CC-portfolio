@@ -6,12 +6,13 @@ import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui";
 import { Button } from "@/components/ui-components/shared";
 import { getMainNavigation, getBranding } from "@/config/helpers";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
+  type Variants,
 } from "framer-motion";
 
 const Navbar = () => {
@@ -48,6 +49,7 @@ const Navbar = () => {
       ];
       const scrollPosition = window.scrollY + 100;
 
+      let found = false;
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -57,26 +59,57 @@ const Navbar = () => {
             scrollPosition < offsetTop + offsetHeight
           ) {
             setActiveSection(`#${section}`);
+            found = true;
             break;
           }
         }
       }
 
-      if (window.scrollY < 100) {
+      if (!found || window.scrollY < 100) {
         setActiveSection("");
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Call once on mount to set initial state
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navVariants = {
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const handleNavClick = useCallback((href: string) => {
+    setIsOpen(false);
+    const element = document.getElementById(href.replace("#", ""));
+    element?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  const navVariants: Variants = {
     visible: { y: 0, opacity: 1 },
     hidden: { y: -100, opacity: 0 },
   };
 
-  const linkVariants = {
+  const linkVariants: Variants = {
     initial: { opacity: 0, y: -20 },
     animate: (i: number) => ({
       opacity: 1,
@@ -89,16 +122,24 @@ const Navbar = () => {
     }),
   };
 
+  const mobileMenuVariants: Variants = {
+    closed: { opacity: 0, height: 0 },
+    open: { opacity: 1, height: "auto" },
+  };
+
   return (
     <motion.nav
       variants={navVariants}
       animate={hidden ? "hidden" : "visible"}
       initial="visible"
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-black/5 dark:bg-[#031128]/70 dark:shadow-black/20"
+          ? "bg-background/80 backdrop-blur-xl shadow-lg shadow-black/5 dark:bg-[#031128]/80 dark:shadow-black/20"
           : "bg-transparent"
       )}
     >
@@ -110,17 +151,21 @@ const Navbar = () => {
         className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-secondary to-primary origin-left"
       />
 
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link
+            href="/"
+            className="flex items-center gap-3 group"
+            onClick={() => setIsOpen(false)}
+          >
             <motion.div
               whileHover={{ scale: 1.1, rotate: 10 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-linear-to-br from-primary to-secondary rounded-lg blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-lg blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
               <Image
                 src="/logo-dark.png"
                 alt="Cedar Core Logo"
@@ -155,15 +200,15 @@ const Navbar = () => {
             {navLinks
               .filter((link) => link.href !== "/")
               .map((link, index) => (
-                <motion.a
+                <motion.button
                   key={link.href}
-                  href={link.href}
+                  onClick={() => handleNavClick(link.href)}
                   custom={index}
                   variants={linkVariants}
                   initial="initial"
                   animate="animate"
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors rounded-lg group",
+                    "relative px-4 py-2 text-sm font-medium transition-colors rounded-lg group cursor-pointer",
                     activeSection === link.href
                       ? "text-primary"
                       : "text-foreground-secondary hover:text-foreground dark:text-foreground-muted dark:hover:text-white"
@@ -189,7 +234,7 @@ const Navbar = () => {
                       }}
                     />
                   )}
-                </motion.a>
+                </motion.button>
               ))}
 
             <motion.div
@@ -210,11 +255,7 @@ const Navbar = () => {
                 <Button
                   text="Get in Touch"
                   className="rounded-full px-6 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow"
-                  onClick={() => {
-                    document
-                      .getElementById("contact")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => handleNavClick("#contact")}
                 />
               </motion.div>
             </motion.div>
@@ -224,12 +265,13 @@ const Navbar = () => {
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
-              "md:hidden p-2 rounded-lg transition-colors",
+              "md:hidden p-2 rounded-lg transition-colors z-50",
               isOpen
                 ? "bg-primary/10 text-primary"
                 : "text-foreground-secondary dark:text-foreground-muted hover:bg-surface"
             )}
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
             whileTap={{ scale: 0.9 }}
           >
             <motion.div
@@ -245,26 +287,29 @@ const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              variants={mobileMenuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              transition={{
+                duration: 0.4,
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+              }}
               className="md:hidden overflow-hidden"
             >
               <div className="py-6 space-y-2 border-t border-border/50">
                 {navLinks
                   .filter((link) => link.href !== "/")
                   .map((link, index) => (
-                    <motion.a
+                    <motion.button
                       key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => handleNavClick(link.href)}
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -30 }}
                       transition={{ delay: index * 0.05 + 0.1 }}
                       className={cn(
-                        "flex items-center gap-3 py-3 px-4 rounded-xl text-lg font-medium transition-all",
+                        "flex items-center gap-3 py-3 px-4 rounded-xl text-lg font-medium transition-all w-full text-left",
                         activeSection === link.href
                           ? "bg-primary/10 text-primary"
                           : "text-foreground-secondary hover:bg-surface hover:text-foreground dark:text-foreground-muted dark:hover:text-white"
@@ -277,7 +322,7 @@ const Navbar = () => {
                         />
                       )}
                       {link.label}
-                    </motion.a>
+                    </motion.button>
                   ))}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -289,12 +334,7 @@ const Navbar = () => {
                   <Button
                     text="Get in Touch"
                     className="w-full rounded-xl py-4 text-base shadow-lg shadow-primary/25"
-                    onClick={() => {
-                      setIsOpen(false);
-                      document
-                        .getElementById("contact")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }}
+                    onClick={() => handleNavClick("#contact")}
                   />
                 </motion.div>
               </div>
