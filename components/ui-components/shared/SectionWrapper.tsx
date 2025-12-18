@@ -17,16 +17,22 @@ const SectionWrapper = ({
 }: SectionWrapperProps) => {
   const variantClasses = {
     default: "bg-background",
-    alternate: "bg-background-secondary dark:bg-surface",
-    dark: "bg-[#020a18] dark:bg-[#010812]",
+    alternate: "bg-background-secondary",
+    dark: "bg-[#010812]",
   };
 
   return (
     <section
       id={id}
-      className={cn("py-24 px-6", variantClasses[variant], className)}
+      className={cn(
+        "relative py-24 md:py-32 px-6",
+        variantClasses[variant],
+        className
+      )}
     >
-      <div className={cn("max-w-6xl mx-auto", containerClassName)}>
+      <div
+        className={cn("relative z-10 max-w-6xl mx-auto", containerClassName)}
+      >
         {children}
       </div>
     </section>

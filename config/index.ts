@@ -7,15 +7,11 @@ export const config: PortfolioConfig = {
   personal: {
     name: "Cedar Core",
     shortName: "Cedar",
-    role: "Creative Development Studio",
-    tagline: "Building Digital Experiences That Matter",
-    bio: `Cedar Core is a creative development studio specializing in modern web applications, 
-    mobile solutions, and digital transformation. We partner with ambitious companies to 
-    turn complex ideas into elegant, high-performance digital products that drive real 
-    business results. Our team combines deep technical expertise with creative problem-solving 
-    to deliver solutions that exceed expectations.`,
+    role: "Software Company",
+    tagline: "Building reliable software that scales",
+    bio: `Cedar Core is a software company that builds applications, systems, and digital platforms for ambitious teams. We combine engineering rigor with creative problem-solving to deliver production-ready solutions that grow with your business. From APIs to full-stack applications, we build the core systems that power modern companies.`,
     shortBio:
-      "Creative development studio specializing in modern web applications, mobile solutions, and digital transformation.",
+      "We build applications, systems, and platforms for teams that need software they can rely on.",
     avatar: "/images/logo.png",
     location: {
       city: "San Francisco",
@@ -56,7 +52,7 @@ export const config: PortfolioConfig = {
     ],
     availability: {
       status: "available",
-      message: "Available for new projects starting January 2025",
+      message: "Accepting new projects",
     },
   },
 
@@ -82,6 +78,43 @@ export const config: PortfolioConfig = {
       mono: "JetBrains Mono",
     },
   },
+
+  // Engineering principles with cedar/strength metaphors
+  principles: [
+    {
+      icon: "GitBranch",
+      title: "Deep Roots",
+      description:
+        "We invest time upfront to understand your domain deeply. Strong foundations lead to sustainable growth.",
+    },
+    {
+      icon: "Layers",
+      title: "Core Strength",
+      description:
+        "Our systems are built from the inside out—solid architecture that scales gracefully under pressure.",
+    },
+    {
+      icon: "Repeat",
+      title: "Organic Growth",
+      description:
+        "We believe in iterative development. Ship early, learn fast, and evolve based on real feedback.",
+    },
+    {
+      icon: "Shield",
+      title: "Resilience",
+      description:
+        "Like the cedar tree, our software is built to weather storms—reliable, tested, and production-ready.",
+    },
+  ],
+
+  capabilities: [
+    { icon: "Layers", label: "Web Applications" },
+    { icon: "Smartphone", label: "Mobile Apps" },
+    { icon: "Server", label: "Backend Systems" },
+    { icon: "Database", label: "Data Platforms" },
+    { icon: "Cpu", label: "APIs & Integrations" },
+    { icon: "Shield", label: "Security" },
+  ],
 
   // ==========================================================================
   // Company Values

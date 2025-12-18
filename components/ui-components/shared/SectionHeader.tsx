@@ -27,31 +27,31 @@ const SectionHeader = ({
       )}
     >
       <motion.span
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="text-primary font-medium text-sm uppercase tracking-wider inline-block"
+        className="text-primary font-mono text-xs uppercase tracking-widest inline-block mb-4"
       >
         {label}
       </motion.span>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="text-3xl md:text-4xl font-bold text-foreground dark:text-white mt-3 mb-4"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-4"
       >
         {title}
       </motion.h2>
       {description && (
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            "text-foreground-secondary dark:text-foreground-muted",
+            "text-foreground-muted text-lg leading-relaxed",
             align === "center" && "max-w-2xl mx-auto"
           )}
         >

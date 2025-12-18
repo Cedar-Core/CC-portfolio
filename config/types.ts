@@ -391,6 +391,17 @@ export interface BrandingConfig {
   };
 }
 
+export interface PrincipleConfig {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+export interface capabilitiesConfig {
+  icon: string;
+  label: string;
+}
+
 // ============================================================================
 // Statistics / Metrics
 // ============================================================================
@@ -439,6 +450,8 @@ export interface PortfolioConfig {
   personal: PersonalInfo;
   branding: BrandingConfig;
   values: Value[];
+  principles: PrincipleConfig[];
+  capabilities: capabilitiesConfig[];
 
   // Content Sections
   skills: Skill[];

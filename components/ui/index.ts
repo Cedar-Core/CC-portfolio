@@ -157,3 +157,6 @@ export const Shad = {
 
 // Motion/Animation exports
 export * from "./motion";
+
+// Motion variants exports
+export * from "./motion-variants";

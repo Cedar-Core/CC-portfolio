@@ -172,6 +172,10 @@ export const getPersonalInfo = () => config.personal;
 
 export const getBranding = () => config.branding;
 
+export const getPrinciples = () => config.principles;
+
+export const getCapabilities = () => config.capabilities;
+
 export const getContactLinks = () => config.personal.contact;
 
 export const getAvailability = () => config.personal.availability;

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import {
   SectionHeader,
   SectionWrapper,
@@ -7,12 +8,13 @@ import {
 } from "@/components/ui-components/shared";
 import ProjectCard from "./ProjectCard";
 import { getFeaturedProjects } from "@/config/helpers";
+import { motion } from "@/components/ui/motion";
 import {
-  StaggerContainer,
-  StaggerItem,
-  FadeInUp,
-  motion,
-} from "@/components/ui/motion";
+  staggerReveal,
+  staggerRevealItem,
+  hoverLift,
+  buttonPress,
+} from "@/components/ui/motion-variants";
 
 interface ProjectsSectionProps {
   className?: string;
@@ -22,17 +24,31 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
   const projects = getFeaturedProjects();
 
   return (
-    <SectionWrapper id="projects" variant="alternate" className={className}>
+    <SectionWrapper
+      id="projects"
+      variant="alternate"
+      className={cn("relative", className)}
+    >
+      {/* Background accent */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-linear-to-t from-primary/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
       <SectionHeader
-        label="Our Work"
-        title="Featured Projects"
-        description="Explore some of our recent projects that showcase our expertise and commitment to delivering exceptional results."
+        label="Selected Work"
+        title="Projects that define us"
+        description="Real solutions for real problems. Here's a look at some of the systems we've built and the impact they've made."
       />
 
-      <StaggerContainer className="grid md:grid-cols-2 gap-8">
+      {/* Projects grid */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerReveal}
+        className="grid md:grid-cols-2 gap-8"
+      >
         {projects.map((project) => (
-          <StaggerItem key={project.id}>
-            <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }}>
+          <motion.div key={project.id} variants={staggerRevealItem}>
+            <motion.div variants={hoverLift} initial="rest" whileHover="hover">
               <ProjectCard
                 title={project.title}
                 category={project.category}
@@ -42,20 +58,33 @@ const ProjectsSection = ({ className }: ProjectsSectionProps) => {
                 href={`/projects/${project.slug}`}
               />
             </motion.div>
-          </StaggerItem>
+          </motion.div>
         ))}
-      </StaggerContainer>
+      </motion.div>
 
-      <FadeInUp delay={0.4} className="text-center mt-12">
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+      {/* CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 }}
+        className="text-center mt-12"
+      >
+        <motion.div
+          variants={buttonPress}
+          initial="rest"
+          whileHover="hover"
+          whileTap="tap"
+          className="inline-block"
+        >
           <Button
             variant="outline"
             text="View All Projects"
             rightIconName="ArrowRight"
-            className="rounded-xl px-6 py-3"
+            className="rounded-full px-6 py-3 border-border hover:border-primary/50 hover:bg-primary-light transition-all"
           />
         </motion.div>
-      </FadeInUp>
+      </motion.div>
     </SectionWrapper>
   );
 };
