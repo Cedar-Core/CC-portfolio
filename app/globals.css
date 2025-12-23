@@ -1,97 +1,498 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   CEDAR CORE - Modern Software Company Design System
+   Inspired by Railway's clarity, tailored for Cedar Core's identity
+   ============================================================================ */
+
 :root {
-  /* Light Mode */
+  /* Light Mode - Derived from brand colors */
   --background: #f8fafc;
   --background-secondary: #ffffff;
+  --background-tertiary: #f1f5f9;
   --foreground: #031128;
   --foreground-secondary: #334155;
   --foreground-muted: #64748b;
   
-  /* Brand Colors */
-  --primary: #4A8FE7;
-  --primary-hover: #3A7FD7;
-  --primary-light: #e0edff;
+  /* Brand Colors - Core Palette */
+  --primary: #5D9EFF;
+  --primary-hover: #4A8FE7;
+  --primary-light: rgba(93, 158, 255, 0.12);
+  --primary-glow: rgba(93, 158, 255, 0.25);
   --secondary: #525FF9;
   --secondary-hover: #424FE9;
-  --secondary-light: #eef0ff;
+  --secondary-light: rgba(82, 95, 249, 0.12);
+  --secondary-glow: rgba(82, 95, 249, 0.25);
+  
+  /* Cedar Theme - Organic accents */
+  --cedar: #2D5A27;
+  --cedar-light: rgba(45, 90, 39, 0.1);
+  --cedar-glow: rgba(45, 90, 39, 0.2);
+  
+  /* Gradient definitions */
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --gradient-subtle: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+  --gradient-glow: radial-gradient(ellipse at center, var(--primary-glow) 0%, transparent 70%);
   
   /* Borders & Surfaces */
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
+  --border-subtle: rgba(0, 0, 0, 0.06);
   --surface: #ffffff;
-  --surface-hover: #f1f5f9;
+  --surface-hover: #f8fafc;
+  --surface-elevated: #ffffff;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 40px var(--primary-glow);
+}
+
+/* Dark Mode - Primary Experience (Dark-first) */
+.dark,
+:root {
+  /* Dark Mode - Core brand background */
+  --background: #031128;
+  --background-secondary: #051a35;
+  --background-tertiary: #071f40;
+  --foreground: #f1f5f9;
+  --foreground-secondary: #cbd5e1;
+  --foreground-muted: #94a3b8;
+  
+  /* Brand Colors */
+  --primary: #5D9EFF;
+  --primary-hover: #7DB3FF;
+  --primary-light: rgba(93, 158, 255, 0.12);
+  --primary-glow: rgba(93, 158, 255, 0.4);
+  --secondary: #525FF9;
+  --secondary-hover: #6B77FF;
+  --secondary-light: rgba(82, 95, 249, 0.12);
+  --secondary-glow: rgba(82, 95, 249, 0.4);
+  
+  /* Neon accent colors */
+  --neon-blue: #00D4FF;
+  --neon-purple: #7B61FF;
+  --neon-glow: 0 0 20px rgba(93, 158, 255, 0.5), 0 0 40px rgba(93, 158, 255, 0.3);
+  
+  /* Cedar Theme */
+  --cedar: #4ADE80;
+  --cedar-light: rgba(74, 222, 128, 0.1);
+  --cedar-glow: rgba(74, 222, 128, 0.2);
+  
+  /* Borders & Surfaces - Glass effect */
+  --border: rgba(93, 158, 255, 0.12);
+  --border-hover: rgba(93, 158, 255, 0.25);
+  --border-subtle: rgba(93, 158, 255, 0.06);
+  --surface: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-elevated: rgba(255, 255, 255, 0.04);
+  
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 60px var(--primary-glow);
+  --shadow-neon: 0 0 20px rgba(93, 158, 255, 0.4), 0 0 40px rgba(93, 158, 255, 0.2);
+}
+
+/* Light mode override when system prefers light */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) {
+    --background: #f8fafc;
+    --background-secondary: #ffffff;
+    --background-tertiary: #f1f5f9;
+    --foreground: #031128;
+    --foreground-secondary: #334155;
+    --foreground-muted: #64748b;
+    --border: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --surface: #ffffff;
+    --surface-hover: #f8fafc;
+    --surface-elevated: #ffffff;
+    --cedar: #2D5A27;
+    --cedar-light: rgba(45, 90, 39, 0.1);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 0 40px var(--primary-glow);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-muted: var(--foreground-muted);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-light: var(--primary-light);
+  --color-primary-glow: var(--primary-glow);
   --color-secondary: var(--secondary);
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-light: var(--secondary-light);
+  --color-secondary-glow: var(--secondary-glow);
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-purple: var(--neon-purple);
+  --color-cedar: var(--cedar);
+  --color-cedar-light: var(--cedar-light);
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
+  --color-border-subtle: var(--border-subtle);
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface-elevated: var(--surface-elevated);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark Mode */
-    --background: #031128;
-    --background-secondary: #061b38;
-    --foreground: #f1f5f9;
-    --foreground-secondary: #cbd5e1;
-    --foreground-muted: #94a3b8;
-    
-    /* Brand Colors */
-    --primary: #5D9EFF;
-    --primary-hover: #7DB3FF;
-    --primary-light: rgba(93, 158, 255, 0.15);
-    --secondary: #525FF9;
-    --secondary-hover: #6B77FF;
-    --secondary-light: rgba(82, 95, 249, 0.15);
-    
-    /* Borders & Surfaces */
-    --border: #1e3a5f;
-    --border-hover: #2d4a6f;
-    --surface: #0a2240;
-    --surface-hover: #0d2a4d;
-  }
+/* ============================================================================
+   BASE STYLES
+   ============================================================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Selection styling */
+::selection {
+  background: var(--primary);
+  color: white;
 }
 
-/* Custom scrollbar */
+/* ============================================================================
+   CUSTOM SCROLLBAR - Subtle and Modern
+   ============================================================================ */
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+  background: var(--border);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
+  background: var(--primary);
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-subtle {
+  box-shadow: 0 0 30px var(--primary-light);
+}
+
+/* Cedar ring pattern - decorative */
+.cedar-rings {
+  background-image: 
+    radial-gradient(circle at center, transparent 30%, var(--border-subtle) 31%, var(--border-subtle) 32%, transparent 33%),
+    radial-gradient(circle at center, transparent 50%, var(--border-subtle) 51%, var(--border-subtle) 52%, transparent 53%),
+    radial-gradient(circle at center, transparent 70%, var(--border-subtle) 71%, var(--border-subtle) 72%, transparent 73%);
+}
+
+/* Noise texture overlay */
+.noise {
+  position: relative;
+}
+
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(93, 158, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 158, 255, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glass card - Premium glass morphism */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(93, 158, 255, 0.12);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Floating panel - Elevated glass effect */
+.floating-panel {
+  background: linear-gradient(180deg, rgba(5, 26, 53, 0.8) 0%, rgba(3, 17, 40, 0.9) 100%);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(93, 158, 255, 0.15);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(93, 158, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Hover glow effect */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+.hover-glow:hover {
+  box-shadow: 
+    0 0 20px rgba(93, 158, 255, 0.3),
+    0 0 40px rgba(93, 158, 255, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  border-color: rgba(93, 158, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Neon text glow */
+.neon-text {
+  text-shadow: 
+    0 0 10px rgba(93, 158, 255, 0.5),
+    0 0 20px rgba(93, 158, 255, 0.3),
+    0 0 40px rgba(93, 158, 255, 0.2);
+}
+
+/* Glitch effect lines */
+.glitch-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glitch-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(93, 158, 255, 0.4) 20%, 
+    rgba(82, 95, 249, 0.6) 50%, 
+    rgba(93, 158, 255, 0.4) 80%, 
+    transparent 100%);
+  opacity: 0;
+  animation: glitch-scan 8s linear infinite;
+}
+
+.glitch-line-1 { animation-delay: 0s; }
+.glitch-line-2 { animation-delay: 2.5s; }
+.glitch-line-3 { animation-delay: 5s; }
+
+/* Data blocks - floating UI elements */
+.data-block {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(93, 158, 255, 0.08) 0%, rgba(82, 95, 249, 0.05) 100%);
+  border: 1px solid rgba(93, 158, 255, 0.1);
+  border-radius: 4px;
+  opacity: 0.3;
+}
+
+.data-block-1 {
+  width: 120px;
+  height: 80px;
+  top: 15%;
+  left: 5%;
+  animation: float-block 20s ease-in-out infinite;
+}
+
+.data-block-2 {
+  width: 80px;
+  height: 60px;
+  top: 60%;
+  right: 8%;
+  animation: float-block 25s ease-in-out infinite reverse;
+}
+
+.data-block-3 {
+  width: 100px;
+  height: 70px;
+  bottom: 20%;
+  left: 10%;
+  animation: float-block 18s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+/* Scanline animation */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Dot pattern background */
+.dot-pattern {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================================
+   ANIMATION KEYFRAMES - Cedar-inspired organic motion
+   ============================================================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes grow-ring {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes branch-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glitch-scan {
+  0%, 100% { 
+    opacity: 0; 
+    top: -10%;
+  }
+  5% { opacity: 0.8; }
+  10% { opacity: 0; }
+  15% { opacity: 0.6; }
+  20% { opacity: 0; }
+  50% { 
+    opacity: 0; 
+    top: 110%;
+  }
+}
+
+@keyframes float-block {
+  0%, 100% { 
+    transform: translateY(0) translateX(0) rotate(0deg); 
+    opacity: 0.2;
+  }
+  25% { 
+    transform: translateY(-20px) translateX(10px) rotate(1deg); 
+    opacity: 0.35;
+  }
+  50% { 
+    transform: translateY(-10px) translateX(-5px) rotate(-0.5deg); 
+    opacity: 0.25;
+  }
+  75% { 
+    transform: translateY(-25px) translateX(5px) rotate(0.5deg); 
+    opacity: 0.3;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(93, 158, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(93, 158, 255, 0.5), 0 0 60px rgba(82, 95, 249, 0.3);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+/* Loading shimmer for skeletons */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--surface-hover) 50%,
+    var(--surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Float animation class */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow animation class */
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ============================================================================
+   FOCUS STYLES - Accessible and on-brand
+   ============================================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }

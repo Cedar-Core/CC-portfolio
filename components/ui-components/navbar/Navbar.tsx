@@ -139,7 +139,7 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-lg shadow-black/5 dark:bg-[#031128]/80 dark:shadow-black/20"
+          ? "bg-[#031128]/70 backdrop-blur-2xl shadow-lg shadow-primary/5 border-b border-primary/10"
           : "bg-transparent"
       )}
     >
@@ -148,7 +148,7 @@ const Navbar = () => {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: scrolled ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-secondary to-primary origin-left"
+        className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent origin-center"
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -160,39 +160,28 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-lg blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
               <Image
                 src="/logo-dark.png"
                 alt="Cedar Core Logo"
                 loading="eager"
-                width={36}
-                height={36}
-                className="rounded-lg relative z-10"
+                width={32}
+                height={32}
+                className="rounded-lg"
               />
             </motion.div>
-            <div className="flex flex-col">
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="font-bold text-foreground dark:text-white text-lg leading-none"
-              >
-                {branding.name}
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-[10px] text-foreground-muted uppercase tracking-widest hidden sm:block"
-              >
-                Creative Studio
-              </motion.span>
-            </div>
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="font-semibold text-foreground text-base"
+            >
+              {branding.name}
+            </motion.span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -208,25 +197,18 @@ const Navbar = () => {
                   initial="initial"
                   animate="animate"
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors rounded-lg group cursor-pointer",
+                    "relative px-3 py-2 text-sm transition-colors rounded-md cursor-pointer",
                     activeSection === link.href
-                      ? "text-primary"
-                      : "text-foreground-secondary hover:text-foreground dark:text-foreground-muted dark:hover:text-white"
+                      ? "text-foreground font-medium"
+                      : "text-foreground-muted hover:text-foreground"
                   )}
                 >
                   {link.label}
-                  {/* Hover background */}
-                  <motion.span
-                    className="absolute inset-0 bg-primary/5 dark:bg-primary/10 rounded-lg -z-10"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
                   {/* Active indicator */}
                   {activeSection === link.href && (
                     <motion.span
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary rounded-full"
                       transition={{
                         type: "spring",
                         stiffness: 380,
@@ -249,12 +231,12 @@ const Navbar = () => {
               className="ml-4"
             >
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Button
-                  text="Get in Touch"
-                  className="rounded-full px-6 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow"
+                  text="Start a Project"
+                  className="rounded-full px-6 py-2.5 text-sm bg-linear-to-r from-primary to-secondary text-white font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
                   onClick={() => handleNavClick("#contact")}
                 />
               </motion.div>

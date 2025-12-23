@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Shad, Icon } from "@/components/ui";
+import { Icon } from "@/components/ui";
 
 interface ServiceCardProps {
   icon: string;
@@ -17,52 +17,50 @@ const ServiceCard = ({
   className,
 }: ServiceCardProps) => {
   return (
-    <Shad.Card
+    <div
       className={cn(
-        "group relative overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1",
+        "group relative h-full p-6 rounded-2xl",
+        "bg-surface/50 backdrop-blur-sm border border-border/50",
+        "hover:border-primary/30 hover:bg-surface/80",
+        "transition-all duration-300",
         className
       )}
     >
-      {/* Gradient border effect on hover */}
-      <div className="absolute inset-0 bg-linear-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-      <div className="absolute inset-px bg-card rounded-2xl" />
+      {/* Subtle glow on hover */}
+      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      <Shad.CardContent className="relative p-6 z-10">
+      <div className="relative z-10">
         {/* Icon */}
-        <div className="w-14 h-14 rounded-xl bg-linear-to-r from-primary to-secondary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/25">
-          <Icon name={icon} size={28} className="text-white" />
+        <div className="w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+          <Icon name={icon} size={24} className="text-primary" />
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-semibold text-foreground dark:text-white mb-3">
+        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-foreground-secondary dark:text-foreground-muted mb-4 leading-relaxed">
+        <p className="text-foreground-muted text-sm leading-relaxed mb-4">
           {description}
         </p>
 
         {/* Features List */}
         {features.length > 0 && (
-          <ul className="space-y-2">
-            {features.map((feature, index) => (
+          <ul className="space-y-2 border-t border-border/50 pt-4">
+            {features.slice(0, 3).map((feature, index) => (
               <li
                 key={index}
-                className="flex items-center gap-2 text-sm text-foreground-secondary dark:text-foreground-muted"
+                className="flex items-center gap-2 text-sm text-foreground-muted"
               >
-                <Icon
-                  name="Check"
-                  size={16}
-                  className="text-primary shrink-0"
-                />
+                <span className="w-1 h-1 rounded-full bg-primary" />
                 {feature}
               </li>
             ))}
           </ul>
         )}
-      </Shad.CardContent>
-    </Shad.Card>
+      </div>
+    </div>
   );
 };
 

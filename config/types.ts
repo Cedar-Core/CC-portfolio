@@ -57,6 +57,47 @@ export interface PersonalInfo {
 }
 
 // ============================================================================
+// clients
+// ============================================================================
+
+export interface clientInfo {
+  name: string;
+  industry: string;
+}
+
+export interface testimonialInfo {
+  id: number;
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  avatar?: string;
+}
+
+// ============================================================================
+// Technologies
+// ============================================================================
+
+export interface Technology {
+  name: string;
+  icon: string;
+  category: string;
+  years: number;
+}
+
+// ============================================================================
+// Process Steps
+// ============================================================================
+
+export interface ProcessStep {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  deliverables: string[];
+}
+
+// ============================================================================
 // Skills
 // ============================================================================
 
@@ -391,6 +432,17 @@ export interface BrandingConfig {
   };
 }
 
+export interface PrincipleConfig {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+export interface capabilitiesConfig {
+  icon: string;
+  label: string;
+}
+
 // ============================================================================
 // Statistics / Metrics
 // ============================================================================
@@ -439,8 +491,13 @@ export interface PortfolioConfig {
   personal: PersonalInfo;
   branding: BrandingConfig;
   values: Value[];
+  principles: PrincipleConfig[];
+  capabilities: capabilitiesConfig[];
 
   // Content Sections
+  clients: clientInfo[];
+  technologies: Technology[];
+  processSteps: ProcessStep[];
   skills: Skill[];
   skillCategories: SkillCategoryConfig[];
   projects: Project[];

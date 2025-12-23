@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Shad, Icon } from "@/components/ui";
+import { Icon } from "@/components/ui";
 import Image from "next/image";
 
 interface ProjectCardProps {
@@ -25,16 +24,18 @@ const ProjectCard = ({
   className,
 }: ProjectCardProps) => {
   return (
-    <Shad.Card
+    <div
       className={cn(
-        "group overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all",
+        "group relative h-full rounded-2xl overflow-hidden",
+        "bg-surface/50 backdrop-blur-sm border border-border/50",
+        "hover:border-primary/30 transition-all duration-300",
         className
       )}
     >
       {/* Project Image/Placeholder */}
       <div
         className={cn(
-          "aspect-video bg-linear-to-br flex items-center justify-center overflow-hidden",
+          "aspect-video bg-linear-to-br flex items-center justify-center overflow-hidden relative",
           gradient
         )}
       >
@@ -42,47 +43,70 @@ const ProjectCard = ({
           <Image
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="text-white/20 text-6xl font-bold">
-            {title.charAt(0)}
-          </div>
+          <>
+            {/* Abstract pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-white/30 rounded-full" />
+              <div className="absolute bottom-1/4 right-1/4 w-24 h-24 border border-white/20 rounded-full" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/10 rounded-full" />
+            </div>
+            <div className="relative text-white/30 text-7xl font-bold">
+              {title.charAt(0)}
+            </div>
+          </>
         )}
+
+        {/* Category badge overlay */}
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium">
+            {category}
+          </span>
+        </div>
       </div>
 
-      <Shad.CardContent className="p-6">
-        <span className="text-primary text-sm font-medium">{category}</span>
-        <h3 className="text-xl font-semibold text-foreground dark:text-white mt-2 mb-3">
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
-        <p className="text-foreground-secondary dark:text-foreground-muted mb-4">
+        <p className="text-foreground-muted text-sm leading-relaxed mb-4">
           {description}
         </p>
 
         {/* Technologies */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, i) => (
-            <Badge
+          {technologies.slice(0, 4).map((tech, i) => (
+            <span
               key={i}
-              variant="outline"
-              className="text-xs bg-background dark:bg-surface"
+              className="px-2 py-1 rounded-md bg-surface text-xs text-foreground-muted border border-border/50"
             >
               {tech}
-            </Badge>
+            </span>
           ))}
+          {technologies.length > 4 && (
+            <span className="px-2 py-1 text-xs text-foreground-muted">
+              +{technologies.length - 4} more
+            </span>
+          )}
         </div>
 
         {/* Link */}
         <a
           href={href}
-          className="inline-flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all"
+          className="inline-flex items-center gap-2 text-primary font-medium text-sm group/link"
         >
-          View Case Study
-          <Icon name="ArrowRight" size={16} />
+          <span>View Case Study</span>
+          <Icon
+            name="ArrowRight"
+            size={16}
+            className="group-hover/link:translate-x-1 transition-transform"
+          />
         </a>
-      </Shad.CardContent>
-    </Shad.Card>
+      </div>
+    </div>
   );
 };
 

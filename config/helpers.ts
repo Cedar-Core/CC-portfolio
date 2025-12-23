@@ -172,6 +172,10 @@ export const getPersonalInfo = () => config.personal;
 
 export const getBranding = () => config.branding;
 
+export const getPrinciples = () => config.principles;
+
+export const getCapabilities = () => config.capabilities;
+
 export const getContactLinks = () => config.personal.contact;
 
 export const getAvailability = () => config.personal.availability;
@@ -197,4 +201,27 @@ export const getProjectsByTechnology = (tech: string): Project[] => {
   return getProjects().filter((p) =>
     p.techStack.some((t) => t.toLowerCase() === tech.toLowerCase())
   );
+};
+
+export const getTechnologies = () => {
+  return config.technologies;
+};
+
+export const getProcessSteps = () => {
+  return config.processSteps;
+};
+
+export const getClients = () => {
+  return config.clients;
+};
+
+export const getClientTestimonials = () => {
+  return config.testimonials.slice(0, 3).map((t) => ({
+    id: t.order,
+    quote: t.content,
+    author: t.author,
+    role: t.role,
+    company: t.company,
+    avatar: t.avatar,
+  }));
 };

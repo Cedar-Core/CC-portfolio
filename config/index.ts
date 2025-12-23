@@ -7,15 +7,11 @@ export const config: PortfolioConfig = {
   personal: {
     name: "Cedar Core",
     shortName: "Cedar",
-    role: "Creative Development Studio",
-    tagline: "Building Digital Experiences That Matter",
-    bio: `Cedar Core is a creative development studio specializing in modern web applications, 
-    mobile solutions, and digital transformation. We partner with ambitious companies to 
-    turn complex ideas into elegant, high-performance digital products that drive real 
-    business results. Our team combines deep technical expertise with creative problem-solving 
-    to deliver solutions that exceed expectations.`,
+    role: "Software Company",
+    tagline: "Building reliable software that scales",
+    bio: `Cedar Core is a software company that builds applications, systems, and digital platforms for ambitious teams. We combine engineering rigor with creative problem-solving to deliver production-ready solutions that grow with your business. From APIs to full-stack applications, we build the core systems that power modern companies.`,
     shortBio:
-      "Creative development studio specializing in modern web applications, mobile solutions, and digital transformation.",
+      "We build applications, systems, and platforms for teams that need software they can rely on.",
     avatar: "/images/logo.png",
     location: {
       city: "San Francisco",
@@ -56,7 +52,7 @@ export const config: PortfolioConfig = {
     ],
     availability: {
       status: "available",
-      message: "Available for new projects starting January 2025",
+      message: "Accepting new projects",
     },
   },
 
@@ -83,6 +79,43 @@ export const config: PortfolioConfig = {
     },
   },
 
+  // Engineering principles with cedar/strength metaphors
+  principles: [
+    {
+      icon: "GitBranch",
+      title: "Deep Roots",
+      description:
+        "We invest time upfront to understand your domain deeply. Strong foundations lead to sustainable growth.",
+    },
+    {
+      icon: "Layers",
+      title: "Core Strength",
+      description:
+        "Our systems are built from the inside out—solid architecture that scales gracefully under pressure.",
+    },
+    {
+      icon: "Repeat",
+      title: "Organic Growth",
+      description:
+        "We believe in iterative development. Ship early, learn fast, and evolve based on real feedback.",
+    },
+    {
+      icon: "Shield",
+      title: "Resilience",
+      description:
+        "Like the cedar tree, our software is built to weather storms—reliable, tested, and production-ready.",
+    },
+  ],
+
+  capabilities: [
+    { icon: "Layers", label: "Web Applications" },
+    { icon: "Smartphone", label: "Mobile Apps" },
+    { icon: "Server", label: "Backend Systems" },
+    { icon: "Database", label: "Data Platforms" },
+    { icon: "Cpu", label: "APIs & Integrations" },
+    { icon: "Shield", label: "Security" },
+  ],
+
   // ==========================================================================
   // Company Values
   // ==========================================================================
@@ -106,6 +139,82 @@ export const config: PortfolioConfig = {
       icon: "TrendingUp",
       title: "Growth",
       description: "Focused on long-term success",
+    },
+  ],
+
+  // ============================================================================
+  // Clients
+  // ============================================================================
+  clients: [
+    { name: "TechStart", industry: "SaaS" },
+    { name: "FinFlow", industry: "Fintech" },
+    { name: "HealthHub", industry: "Healthcare" },
+    { name: "RetailX", industry: "E-commerce" },
+    { name: "EduPro", industry: "EdTech" },
+    { name: "GreenLogix", industry: "Logistics" },
+  ],
+
+  // ============================================================================
+  // Technologies
+  // ============================================================================
+  technologies: [
+    { name: "React.js", icon: "Code", category: "Frontend", years: 6 },
+    { name: "Next.js", icon: "Layers", category: "Frontend", years: 4 },
+    { name: "TypeScript", icon: "FileCode", category: "Language", years: 5 },
+    { name: "Node.js", icon: "Server", category: "Backend", years: 7 },
+    { name: "Python", icon: "Terminal", category: "Language", years: 6 },
+    { name: "PostgreSQL", icon: "Database", category: "Database", years: 8 },
+    { name: "MongoDB", icon: "Database", category: "Database", years: 5 },
+    { name: "AWS", icon: "Cloud", category: "Cloud", years: 6 },
+    { name: "Docker", icon: "Box", category: "DevOps", years: 5 },
+    { name: "GraphQL", icon: "GitBranch", category: "API", years: 4 },
+    { name: "Redis", icon: "Zap", category: "Cache", years: 5 },
+    { name: "Kubernetes", icon: "Box", category: "DevOps", years: 3 },
+  ],
+
+  // ============================================================================
+  // Process Steps
+  // ============================================================================
+  processSteps: [
+    {
+      id: 1,
+      title: "Discovery",
+      description:
+        "We dive deep into your business goals, technical requirements, and user needs to define a clear project roadmap.",
+      icon: "Search",
+      deliverables: ["Requirements Doc", "Technical Spec", "Project Timeline"],
+    },
+    {
+      id: 2,
+      title: "Design",
+      description:
+        "Our designers create intuitive interfaces and system architectures that align with your brand and scale with your growth.",
+      icon: "Palette",
+      deliverables: ["UI/UX Designs", "Architecture Diagrams", "Prototypes"],
+    },
+    {
+      id: 3,
+      title: "Development",
+      description:
+        "We build using agile methodology with continuous integration, regular demos, and transparent communication.",
+      icon: "Code",
+      deliverables: ["Working Software", "Code Reviews", "Sprint Updates"],
+    },
+    {
+      id: 4,
+      title: "Testing",
+      description:
+        "Rigorous QA processes ensure your software is reliable, secure, and performs under pressure.",
+      icon: "CircleCheck",
+      deliverables: ["Test Reports", "Bug Fixes", "Performance Metrics"],
+    },
+    {
+      id: 5,
+      title: "Deployment",
+      description:
+        "We handle the launch with zero-downtime deployments, monitoring setup, and post-launch support.",
+      icon: "Rocket",
+      deliverables: ["Live Product", "Documentation", "Training"],
     },
   ],
 
